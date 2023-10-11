@@ -32,6 +32,8 @@ app.engine('hbs', engine({
     defaultView: 'default'
 }));
 
+app.use(express.static('images')); 
+
 // set up the parser to get the contents of data from html forms 
 // this would be used in a POST to the server as follows:
 // app.post('/route', urlencodedParser, (req, res) => {}
