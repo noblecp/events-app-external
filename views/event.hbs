@@ -1,7 +1,4 @@
-
-
 {{#events}}
-  <div class='col-4' id='event-entry'>
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
         <p>Location: {{ location }}</p>
@@ -15,19 +12,12 @@
         <input type="submit" value="UN-Like">
         </form>
         <img src="https://tse3.mm.bing.net/th/id/OIP.HAu8l9ToJmaNvUVYqmDe2AHaE8?pid=ImgDet&rs=1" alt="image can't be found" width="100" onerror="this.onerror=null; this.src='https://tse1.mm.bing.net/th/id/OIP.GhK0xqhcPT0DVriwmC4wOAHaHa?pid=ImgDet&rs=1'">
-        <p></p>
-        <button onclick="window.location = '/event/' + {{id}}">Go to event</button>
         </p>
-    </div>
-  {{/events}}
+{{/events}}
 
-  <div>
-        <h2>Add an event</h2>
-        <form action="/event" method="post">
-        title: <input name="title" type="text" /> <br />
-        description: <input name="description" type="text" /> <br />
-        location: <input name="location" type="text" /> <br />
-        <br />
-            <input type="submit" name="submit" value="submit" />
-        </form>
-  </div>
+<button onclick="window.location = '/';">Go Home</button>
+
+<h1>COMMENTS</h1>
+
+
+
