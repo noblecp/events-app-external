@@ -37,6 +37,24 @@ app.engine('hbs', engine({
 // app.post('/route', urlencodedParser, (req, res) => {}
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+// Import the OAuth2 strategy configuration
+require('./oath2-config.js');
+const passport = require('passport');
+// Initialize Passport and configure it to work with Express
+app.use(passport.initialize());
+
+const logged_in = true
+
+app.get('/auth/google',
+    passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect: '/', // Redirect to a success page
+        failureRedirect: '/'   // Redirect to an error page
+    })
+);
 
 // defines a route that receives the request to /
 app.get('/', (req, res) => {
@@ -62,10 +80,26 @@ app.get('/', (req, res) => {
                     });
             }
             else {
-                console.log('error:', error); // Print the error if one occurred
-                console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-                console.log(body); // print the return from the server microservice
-                res.render('home',
+                if (logged_in) {
+                    console.log('error:', error); // Print the error if one occurred
+                    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+                    console.log(body); // print the return from the server microservice
+                    res.render('login',
+                    {
+                        layout: 'default',  //the outer html page
+                        template: 'index-template', // the partial view inserted into 
+                        // {{body}} in the layout - the code
+                        // in here inserts values from the JSON
+                        // received from the server
+                        login: body
+                    }); // pass the data from the server to the template
+                }
+                else{
+
+                    console.log('error:', error); // Print the error if one occurred
+                    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+                    console.log(body); // print the return from the server microservice
+                    res.render('home',
                     {
                         layout: 'default',  //the outer html page
                         template: 'index-template', // the partial view inserted into 
@@ -74,6 +108,7 @@ app.get('/', (req, res) => {
                         // received from the server
                         events: body.events
                     }); // pass the data from the server to the template
+                }
             }
         });
 });
