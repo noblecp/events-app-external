@@ -1,6 +1,7 @@
-<ul >
-  {{#events}}
-    <li>
+
+
+{{#events}}
+  <div class='col-4' id='event-entry'>
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
         <p>Location: {{ location }}</p>
@@ -17,6 +18,5 @@
         <p></p>
         <button onclick="window.location = '/event/' + {{id}}">Go to event</button>
         </p>
-    </li>
+    </div>
   {{/events}}
-</ul>

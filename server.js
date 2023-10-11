@@ -39,24 +39,53 @@ app.use(express.static('images'));
 // app.post('/route', urlencodedParser, (req, res) => {}
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-// // Import the OAuth2 strategy configuration
-// require('./oath2-config.js');
-// const passport = require('passport');
-// // Initialize Passport and configure it to work with Express
-// app.use(passport.initialize());
+const users = [
+    {
+        username: "user1",
+        email: "user1@email.com"
+    }
+]
 
-// const logged_in = true
+function userExists(username, email) {
+    // Use the Array.prototype.some() method to check if any object in the array matches the given username and email
+    return users.some(function(obj) {
+      return obj.username === username && obj.email === email;
+    });
+  }
 
-// app.get('/auth/google',
-//     passport.authenticate('google', { scope: ['profile', 'email'] })
-// );
+var logged_in = false
 
-// app.get('/auth/google/callback',
-//     passport.authenticate('google', {
-//         successRedirect: '/', // Redirect to a success page
-//         failureRedirect: '/'   // Redirect to an error page
-//     })
-// );
+// defines a route that receives the post request to /event
+app.post('/login',
+    urlencodedParser, // second argument - how to parse the uploaded content
+    // into req.body
+    (req, res) => {
+        // make a request to the backend microservice using the request package
+        // the URL for the backend service should be set in configuration 
+        // using an environment variable. Here, the variable is passed 
+        // to npm start inside package.json:
+        //  "start": "SERVER=http://localhost:8082 node server.js",
+        request.post(  // first argument: url + data + formats
+            {
+                url: SERVER + '/login',  // the microservice end point for adding an event
+                body: req.body,  // content of the form
+                headers: { // uploading json
+                    "Content-Type": "application/json"
+                },
+                json: true // response from server will be json format
+            },
+            () => {
+                if (userExists(req.body.username, req.body.email)){
+                    logged_in = true
+                    console.log("Login successful")
+                }
+                else {
+                    console.log("Error: incorrect login information")
+                }
+                res.redirect("/"); // redirect to the home page on successful response
+            });
+
+    });
 
 // defines a route that receives the request to /
 app.get('/', (req, res) => {
@@ -82,21 +111,21 @@ app.get('/', (req, res) => {
                     });
             }
             else {
-                // if (logged_in) {
-                //     console.log('error:', error); // Print the error if one occurred
-                //     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-                //     console.log(body); // print the return from the server microservice
-                //     res.render('login',
-                //     {
-                //         layout: 'default',  //the outer html page
-                //         template: 'index-template', // the partial view inserted into 
-                //         // {{body}} in the layout - the code
-                //         // in here inserts values from the JSON
-                //         // received from the server
-                //         login: body
-                //     }); // pass the data from the server to the template
-                // }
-                // else{
+                if (!logged_in) {
+                    console.log('error:', error); // Print the error if one occurred
+                    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+                    console.log(body); // print the return from the server microservice
+                    res.render('login',
+                    {
+                        layout: 'default',  //the outer html page
+                        template: 'index-template', // the partial view inserted into 
+                        // {{body}} in the layout - the code
+                        // in here inserts values from the JSON
+                        // received from the server
+                        login: body
+                    }); // pass the data from the server to the template
+                }
+                else{
 
                 console.log('error:', error); // Print the error if one occurred
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
@@ -110,7 +139,7 @@ app.get('/', (req, res) => {
                         // received from the server
                         events: body.events
                     }); // pass the data from the server to the template
-                // }
+                }
             }
         });
 });
