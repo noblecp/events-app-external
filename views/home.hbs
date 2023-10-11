@@ -1,6 +1,7 @@
-<ul >
-  {{#events}}
-    <li>
+
+
+{{#events}}
+  <div class='col-4' id='event-entry'>
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
         <p>Location: {{ location }}</p>
@@ -15,6 +16,5 @@
         </form>
         <img src="pizza.jpeg" alt="image can't be found" width="100" onerror="this.onerror=null; this.src='noimage.jpeg'">
         </p>
-    </li>
+    </div>
   {{/events}}
-</ul>
