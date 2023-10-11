@@ -1,6 +1,4 @@
-<ul >
-  {{#events}}
-    <li>
+{{#events}}
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
         <p>Location: {{ location }}</p>
@@ -14,9 +12,12 @@
         <input type="submit" value="UN-Like">
         </form>
         <img src="https://tse3.mm.bing.net/th/id/OIP.HAu8l9ToJmaNvUVYqmDe2AHaE8?pid=ImgDet&rs=1" alt="image can't be found" width="100" onerror="this.onerror=null; this.src='https://tse1.mm.bing.net/th/id/OIP.GhK0xqhcPT0DVriwmC4wOAHaHa?pid=ImgDet&rs=1'">
-        <p></p>
-        <button onclick="window.location = '/event/' + {{id}}">Go to event</button>
         </p>
-    </li>
-  {{/events}}
-</ul>
+{{/events}}
+
+<button onclick="window.location = '/';">Go Home</button>
+
+<h1>COMMENTS</h1>
+
+
+

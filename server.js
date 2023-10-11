@@ -32,7 +32,7 @@ app.engine('hbs', engine({
     defaultView: 'default'
 }));
 
-app.use(express.static('images')); 
+app.use(express.static('images'));
 
 // set up the parser to get the contents of data from html forms 
 // this would be used in a POST to the server as follows:
@@ -98,10 +98,10 @@ app.get('/', (req, res) => {
                 // }
                 // else{
 
-                    console.log('error:', error); // Print the error if one occurred
-                    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-                    console.log(body); // print the return from the server microservice
-                    res.render('home',
+                console.log('error:', error); // Print the error if one occurred
+                console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+                console.log(body); // print the return from the server microservice
+                res.render('home',
                     {
                         layout: 'default',  //the outer html page
                         template: 'index-template', // the partial view inserted into 
@@ -134,7 +134,7 @@ app.post('/event',
                 },
                 json: true // response from server will be json format
             },
-            () => {  
+            () => {
                 res.redirect("/"); // redirect to the home page on successful response
             });
 
@@ -161,7 +161,7 @@ app.post('/event/like',
                 },
                 json: true // response from backend will be json format
             },
-            () => {  
+            () => {
                 res.redirect("/"); // redirect to the home page on successful response
             });
 
@@ -187,11 +187,11 @@ app.post('/event/unlike',
                 },
                 json: true // response from backend will be json format
             },
-            () => {  
+            () => {
                 res.redirect("/"); // redirect to the home page on successful response
             });
 
-    });    
+    });
 
 // create other get and post methods here - version, login,  etc
 
@@ -213,5 +213,43 @@ const server = app.listen(SERVICE_PORT, () => {
 
     console.log(`Events app listening at http://${host}:${port}`);
 });
+
+app.get('/event/:id', (req, res) => {
+    request.get(  // first argument: url + return format
+        {
+            url: SERVER + '/events/',  // the microservice end point for events
+            json: true  // response from server will be json format
+        },
+        (error, response, body) => {
+           
+            if (error) {
+                console.log('error:', error); // Print the error if one occurred
+                res.render('error_message',
+                    {
+                        layout: 'default',  //the outer html page
+                        error: error // pass the data from the server to the template
+                    });
+            }
+            else {
+                console.log(req.params.id);                
+                console.log('error:', error); // Print the error if one occurred
+                console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+                console.log(body); // print the return from the server microservice
+                res.render('event',
+                    {
+                        layout: 'default',  //the outer html page
+                        template: 'index-template', // the partial view inserted into 
+                        // {{body}} in the layout - the code
+                        // in here inserts values from the JSON
+                        // received from the server
+                        events: body.events.filter((val) => val.id == req.params.id),
+                        eventId: req.params.id
+                    }); // pass the data from the server to the template
+                // }
+            }
+        });
+
+});
+
 
 module.exports = app;
