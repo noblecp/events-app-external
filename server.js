@@ -273,7 +273,7 @@ const server = app.listen(SERVICE_PORT, () => {
 
     console.log(`Events app listening at http://${host}:${port}`);
 });
-
+var eid = -1
 app.get('/event/:id', (req, res) => {
     request.get(  // first argument: url + return format
         {
@@ -291,7 +291,8 @@ app.get('/event/:id', (req, res) => {
                     });
             }
             else {
-                console.log(req.params.id);                
+                console.log(req.params.id);   
+                eid   = req.params.id;         
                 console.log('error:', error); // Print the error if one occurred
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
                 console.log(body); // print the return from the server microservice
@@ -312,5 +313,48 @@ app.get('/event/:id', (req, res) => {
 
 });
 
+// defines a route that receives the post request to /event/like to like the event
+app.post('/event/like2',
+    urlencodedParser, // second argument - how to parse the uploaded content
+    // into req.body
+    (req, res) => {
+        // make a request to the backend microservice using the request package
+        // the URL for the backend service should be set in configuration 
+        // using an environment variable. Here, the variable is passed 
+        // to npm start inside package.json:
+        //  "start": "BACKEND_URL=http://localhost:8082 node server.js",
+        // changed to a put now that real data is being updated
+        request.put(  // first argument: url + data + formats
+            {
+                url: SERVER + '/event/like',  // the microservice end point for liking an event
+                body: req.body,  // content of the form
+                headers: { // uploading json
+                    "Content-Type": "application/json"
+                },
+                json: true // response from backend will be json format
+            },
+            () => {
+                 res.redirect(eid)// redirect to the home page on successful response
+            });
 
+    });
+
+
+app.post('/event/unlike2',
+    urlencodedParser,
+    (req, res) => {
+        request.delete(  // first argument: url + data + formats
+            {
+                url: SERVER + '/event/like',  // the microservice end point for liking an event
+                body: req.body,  // content of the form
+                headers: { // uploading json
+                    "Content-Type": "application/json"
+                },
+                json: true // response from backend will be json format
+            },
+            () => {
+                res.redirect(eid)
+            });
+
+    });
 module.exports = app;
