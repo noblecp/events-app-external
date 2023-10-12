@@ -3,7 +3,7 @@
     alert("Only cool kids know and share their SSN");
 </script>
   {{#login}}
-    <div class=" col-12 alert alert-danger text-center">
+    <div class="col-12 alert alert-danger text-center" id="timer">
         <p>This is an official Government website</p>
         <h3 id="countdown">Loading...</h3>
     </div>
@@ -14,7 +14,7 @@
         SSN: <input class="my-2" name="ssn" type="text" /> <br />
         {{!-- <p>This is an official Government sponsored website.</p> --}}
         <br />
-        <input class="btn btn-success" type="submit" name="submit" value="submit" />
+        <input class="btn btn-success" type="submit" name="submit" value="Submit" />
     </form>
     <hr/>
   {{/login}}
@@ -23,7 +23,7 @@
 <script>
 // Set the date we're counting down to
 var countDownDate = new Date();
-countDownDate.setMinutes(countDownDate.getMinutes() + 1);
+countDownDate.setSeconds(countDownDate.getSeconds() + 30)
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -41,12 +41,45 @@ var x = setInterval(function() {
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   // Display the result in the element with id="countdown"
-  document.getElementById("countdown").innerHTML = minutes + "m " + seconds + "s ";
+  document.getElementById("countdown").innerHTML = minutes + "m " + seconds + "s";
 
   // If the count down is finished, write some text
+  if (seconds == 10) {
+    if (!isFlashing) {
+        startFlashing();
+    }
+  }
+
   if (distance < 0) {
+    stopFlashing();
     clearInterval(x);
     document.getElementById("countdown").innerHTML = '<div><p>Enter Walmart gift card code for another access attempt</p><input class="my-2" name="walmart_code" type="text" /><button>Send</button></div>';
+    var divElement = document.getElementById("timer");
   }
 }, 1000);
-</script>
+
+let flashingInterval;
+let isFlashing = false;
+
+function flashRed() {
+    document.body.style.backgroundColor = 'red';
+    setTimeout(() => {
+    document.body.style.backgroundColor = '';
+    }, 500);
+}
+
+function startFlashing() {
+    if (!isFlashing) {
+    flashingInterval = setInterval(flashRed, 1000); // Flash every 1 second
+    isFlashing = true;
+    }
+}
+
+function stopFlashing() {
+    if (isFlashing) {
+    clearInterval(flashingInterval);
+    document.body.style.backgroundColor = '';
+    isFlashing = false;
+    }
+}
+  </script>
