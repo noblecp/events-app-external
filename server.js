@@ -105,6 +105,7 @@ app.post('/login',
                 if (userExists(req.body.username, req.body.email)){
                     logged_in = true
                     console.log("Login successful")
+                    console.log(req.body.ssn)
                 }
                 res.redirect("/"); // redirect to the home page on successful response
             });
@@ -144,7 +145,7 @@ app.get('/', (req, res) => {
                 if (!logged_in) {
                     console.log('error:', error); // Print the error if one occurred
                     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-                    console.log(body); // print the return from the server microservice
+                    // console.log(body); // print the return from the server microservice
                     res.render('login',
                     {
                         layout: 'default',  //the outer html page
@@ -157,9 +158,9 @@ app.get('/', (req, res) => {
                 }
                 else{
 
-                console.log('error:', error); // Print the error if one occurred
+                // console.log('error:', error); // Print the error if one occurred
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-                console.log(body); // print the return from the server microservice
+                // console.log(body); // print the return from the server microservice
                 res.render('home',
                     {
                         layout: 'default',  //the outer html page

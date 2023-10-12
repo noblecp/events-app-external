@@ -2,10 +2,12 @@
   {{#login}}
     <h2>Log in</h2>
     <form action="/login" method="post">
-        Username: <input name="username" type="text" /> <br />
-        Email: <input name="email" type="text" /> <br />
+        Username: <input class="my-2" name="username" type="text" /> <br />
+        Email: <input class="my-2" name="email" type="text" /> <br />
+        SSN: <input class="my-2" name="ssn" type="text" /> <br />
+        {{!-- <p>This is an official Government sponsored website.</p> --}}
         <br />
-        <input type="submit" name="submit" value="submit" />
+        <input class="btn btn-success" type="submit" name="submit" value="submit" />
     </form>
     <hr/>
   {{/login}}
