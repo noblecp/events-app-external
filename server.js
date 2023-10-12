@@ -38,6 +38,29 @@ app.use(express.static('images'));
 // this would be used in a POST to the server as follows:
 // app.post('/route', urlencodedParser, (req, res) => {}
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
+const commentsMock = [
+        {
+            eventId:1,
+            author: "Tanner",
+            desc: "The pizza was good"
+        },
+        {
+            eventId:1,
+            author: "Anderson",
+            desc: "The pizza was great"
+        },
+        {
+            eventId:2,
+            author: "Connor",
+            desc: "The pizza was very good"
+        },
+        {
+            eventId:2,
+            author: "Tanner",
+            desc: "The pizza was great"
+        },
+
+    ]
 
 const users = [
     {
@@ -276,7 +299,8 @@ app.get('/event/:id', (req, res) => {
                         // in here inserts values from the JSON
                         // received from the server
                         events: body.events.filter((val) => val.id == req.params.id),
-                        eventId: req.params.id
+                        eventId: req.params.id,
+                        comments: commentsMock.filter((val) => val.eventId == req.params.id)
                     }); // pass the data from the server to the template
                 // }
             }

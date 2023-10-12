@@ -18,6 +18,13 @@
 <button onclick="window.location = '/';">Go Home</button>
 
 <h1>COMMENTS</h1>
+<table class="table-bordered">
+    <tr><td>Author</td><td>Comment</td></tr>
+{{#comments}}
+<tr>
+    <td>{{author}}</td>
+    <td>{{desc}}</td>
+</tr>
 
-
-
+{{/comments}}
+</table>
