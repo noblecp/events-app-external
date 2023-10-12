@@ -30,12 +30,16 @@
   {{/events}}
   </div>
 
-  <div>
+  <div class="container">
         <h2>Add an event</h2>
         <form action="/event" method="post">
+        <div class="form-group">
         title: <input name="title" type="text" /> <br />
+        </div>
+        <div class="form-group">
         description: <input name="description" type="text" /> <br />
         location: <input name="location" type="text" /> <br />
+        </div>
         <br />
             <input type="submit" name="submit" value="submit" />
         </form>
