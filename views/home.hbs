@@ -5,7 +5,52 @@
 </div>
 <script>
     alert("Identity Theft Activated 😂");
+function fade(element) {
+    var op = 1;  // initial opacity
+    var timer = setInterval(function () {
+        if (op <= 0.1){
+            clearInterval(timer);
+            element.style.display = 'none';
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.1;
+    }, 50);
+}
+    const move = () => {
+        /*alert("😂")*/
+        y = Math.random() * 100
+        x = Math.random() * 100
+
+        console.log(y);
+
+        document.getElementById("report").style.top = x + '%';
+        document.getElementById("report").style.left = y + '%';
+
+        x = document.getElementById('you_thought').style.display="inline";
+        /*x.style.display = inline;*/
+        var countDownDate = new Date();
+        setTimeout(disappear, 500);
+
+    }
+    function disappear () {
+        document.getElementById('you_thought').style.display="none";
+    }
+
 </script>
+
+<style>
+    #like_unlike {
+        display: flex;
+        flex-direction: row;
+    }
+</style>
+
+<button type="button" id="report" onclick="move()" onmouseover="move()" style="position:absolute;">
+    Report for identity theft
+</button>
+
+<h1 id="you_thought" style='font-size:700px;position:absolute;display:none;top:-100px;'>😂</h1>
 
 <div>
 {{#events}}
@@ -13,34 +58,74 @@
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
         <p>Location: {{ location }}</p>
-        <p>Likes: {{ likes }}
-        <form method="POST" action="/event/like">
-        <input type="hidden" value="{{id}}" name="id">
-        <input type="submit" value="Like">
-        </form>
-        <form method="POST" action="/event/unlike">
-        <input type="hidden" value="{{id}}" name="id">
-        <input type="submit" value="UN-Like">
-        </form>
-        <img src="https://tse3.mm.bing.net/th/id/OIP.HAu8l9ToJmaNvUVYqmDe2AHaE8?pid=ImgDet&rs=1" alt="image can't be found" width="100" onerror="this.onerror=null; this.src='https://tse1.mm.bing.net/th/id/OIP.GhK0xqhcPT0DVriwmC4wOAHaHa?pid=ImgDet&rs=1'">
+        {{!-- <p>Likes: {{ likes }} --}}
+
+        
+        {{!-- <form method="POST" action="/event/unlike">
+            <input type="hidden" value="{{id}}" name="id">
+            <input type="submit" value="UN-Like">
+        </form> --}}
+        <img src="https://tse3.mm.bing.net/th/id/OIP.HAu8l9ToJmaNvUVYqmDe2AHaE8?pid=ImgDet&rs=1" alt="image can't be found" width="300" onerror="this.onerror=null; this.src='https://tse1.mm.bing.net/th/id/OIP.GhK0xqhcPT0DVriwmC4wOAHaHa?pid=ImgDet&rs=1'" class="rounded">
         <p></p>
+        <div id="like_unlike" class="my-3">
+            
+            <form class="me-3" method="POST" action="/event/like">
+                <input type="hidden" value="{{id}}" name="id">
+                <button type="submit" class="btn btn-primary position-relative">
+                    &#128077
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ likes }}
+                    </span>
+                </button>
+            </form>
+
+            <form method="POST" action="/event/unlike">
+                <input type="hidden" value="{{id}}" name="id">
+                <button type="submit" class="btn btn-primary position-relative">
+                    &#128078
+                </button>
+            </form>
+        </div>
         <button onclick="window.location = '/event/' + {{id}}">Go to event</button>
         </p>
     </div>
   {{/events}}
   </div>
 
-  <div class="container">
+  <div class="container bg-body-tertiary p-5 rounded">
         <h2>Add an event</h2>
         <form action="/event" method="post">
         <div class="form-group">
-        title: <input name="title" type="text" /> <br />
+            {{!-- title --}}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+                <input type="text" name="title" class="form-control">
+            </div>
+        {{!-- title: <input name="title" type="text" /> <br /> --}}
         </div>
+
         <div class="form-group">
-        description: <input name="description" type="text" /> <br />
-        location: <input name="location" type="text" /> <br />
+            {{!-- description --}}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+                <input type="text" name="description" class="form-control">
+            </div>
+            {{!-- location --}}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Location</span>
+                <input type="text" name="location" class="form-control">
+            </div>
+            {{!-- location: <input name="location" type="text" /> <br /> --}}
         </div>
+        
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" id="inputGroupFile02">
+            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+        </div>
+
         <br />
-            <input type="submit" name="submit" value="submit" />
+        <input class="btn btn-primary" type="submit" name="submit" value="Submit" />
+
         </form>
   </div>
+
