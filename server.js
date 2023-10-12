@@ -38,6 +38,29 @@ app.use(express.static('images'));
 // this would be used in a POST to the server as follows:
 // app.post('/route', urlencodedParser, (req, res) => {}
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
+const commentsMock = [
+        {
+            eventId:1,
+            author: "Tanner",
+            desc: "The pizza was good"
+        },
+        {
+            eventId:1,
+            author: "Anderson",
+            desc: "The pizza was great"
+        },
+        {
+            eventId:2,
+            author: "Connor",
+            desc: "The pizza was very good"
+        },
+        {
+            eventId:2,
+            author: "Tanner",
+            desc: "The pizza was great"
+        },
+
+    ]
 
 const users = [
     {
@@ -82,14 +105,18 @@ app.post('/login',
                 if (userExists(req.body.username, req.body.email)){
                     logged_in = true
                     console.log("Login successful")
-                }
-                else {
-                    console.log("Error: incorrect login information")
+                    console.log(req.body.ssn)
                 }
                 res.redirect("/"); // redirect to the home page on successful response
             });
 
     });
+
+app.get('/logout', (req, res) => {
+    logged_in = false
+    res.redirect("/")
+})
+
 
 // defines a route that receives the request to /
 app.get('/', (req, res) => {
@@ -118,7 +145,7 @@ app.get('/', (req, res) => {
                 if (!logged_in) {
                     console.log('error:', error); // Print the error if one occurred
                     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-                    console.log(body); // print the return from the server microservice
+                    // console.log(body); // print the return from the server microservice
                     res.render('login',
                     {
                         layout: 'default',  //the outer html page
@@ -131,9 +158,9 @@ app.get('/', (req, res) => {
                 }
                 else{
 
-                console.log('error:', error); // Print the error if one occurred
+                // console.log('error:', error); // Print the error if one occurred
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-                console.log(body); // print the return from the server microservice
+                // console.log(body); // print the return from the server microservice
                 res.render('home',
                     {
                         layout: 'default',  //the outer html page
@@ -276,7 +303,8 @@ app.get('/event/:id', (req, res) => {
                         // in here inserts values from the JSON
                         // received from the server
                         events: body.events.filter((val) => val.id == req.params.id),
-                        eventId: req.params.id
+                        eventId: req.params.id,
+                        comments: commentsMock.filter((val) => val.eventId == req.params.id)
                     }); // pass the data from the server to the template
                 // }
             }
