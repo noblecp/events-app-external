@@ -3,11 +3,11 @@
         <p>{{ description }}</p>
         <p>Location: {{ location }}</p>
         <p>Likes: {{ likes }}
-        <form method="POST" action="/event/like">
+        <form method="POST" action="/event/like2">
         <input type="hidden" value="{{id}}" name="id">
         <input type="submit" value="Like">
         </form>
-        <form method="POST" action="/event/unlike">
+        <form method="POST" action="/event/unlike2">
         <input type="hidden" value="{{id}}" name="id">
         <input type="submit" value="UN-Like">
         </form>
