@@ -1,21 +1,41 @@
+<button onclick="window.location = '/';" class="btn btn-dark">Go Home</button>
 {{#events}}
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
         <p>Location: {{ location }}</p>
-        <p>Likes: {{ likes }}
-        <form method="POST" action="/event/like2">
-        <input type="hidden" value="{{id}}" name="id">
-        <input type="submit" value="Like">
-        </form>
-        <form method="POST" action="/event/unlike2">
-        <input type="hidden" value="{{id}}" name="id">
-        <input type="submit" value="UN-Like">
-        </form>
-        <img src="https://tse3.mm.bing.net/th/id/OIP.HAu8l9ToJmaNvUVYqmDe2AHaE8?pid=ImgDet&rs=1" alt="image can't be found" width="100" onerror="this.onerror=null; this.src='https://tse1.mm.bing.net/th/id/OIP.GhK0xqhcPT0DVriwmC4wOAHaHa?pid=ImgDet&rs=1'">
+        <div id="like_unlike" class="my-3">
+            <form class="me-3" method="POST" action="/event/like2">
+                <input type="hidden" value="{{id}}" name="id">
+                <button type="submit" class="btn btn-primary position-relative">
+                    &#128077
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ likes }}
+                    </span>
+                </button>
+            </form>
+            <form method="POST" action="/event/unlike2">
+                <input type="hidden" value="{{id}}" name="id">
+                <button type="submit" class="btn btn-primary position-relative">
+                    &#128078
+                </button>
+            </form>
+        </div>
+        <img src="https://tse3.mm.bing.net/th/id/OIP.HAu8l9ToJmaNvUVYqmDe2AHaE8?pid=ImgDet&rs=1" alt="image can't be found" width="300" onerror="this.onerror=null; this.src='https://tse1.mm.bing.net/th/id/OIP.GhK0xqhcPT0DVriwmC4wOAHaHa?pid=ImgDet&rs=1'">
         </p>
 {{/events}}
-
-<button onclick="window.location = '/';">Go Home</button>
+<h3>Post Comment</h3>
+<form method="POST" action="/comment">
+    Author: <input type="text"  name="author"><br>
+    Comment: <input type="text" name="desc"><br>
+    <input type="submit" value="Add Comment">
+</form>
+<style>
+    .column {
+      display: inline-block;
+      width: 50%; /* Each column takes up 50% of the container's width */
+      box-sizing: border-box; /* Include padding and border in the width */
+    }
+</style>
 
 <h1>COMMENTS</h1>
 <table class="table-bordered">
@@ -30,3 +50,11 @@
 </table>
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d152355.9830873335!2d-173.01661705442552!3d60.66499870099208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1697125799086!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
+<style>
+    #like_unlike {
+        display: flex;
+        flex-direction: row;
+    }
+</style>
