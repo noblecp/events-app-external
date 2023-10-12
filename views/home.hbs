@@ -5,15 +5,45 @@
 </div>
 <script>
     alert("Identity Theft Activated 😂");
-
+function fade(element) {
+    var op = 1;  // initial opacity
+    var timer = setInterval(function () {
+        if (op <= 0.1){
+            clearInterval(timer);
+            element.style.display = 'none';
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.1;
+    }, 50);
+}
     const move = () => {
-        alert("😂")
+        /*alert("😂")*/
+        y = Math.random() * 100
+        x = Math.random() * 100
+
+        console.log(y);
+
+        document.getElementById("report").style.top = x + '%';
+        document.getElementById("report").style.left = y + '%';
+
+        x = document.getElementById('you_thought').style.display="inline";
+        /*x.style.display = inline;*/
+        var countDownDate = new Date();
+        setTimeout(disappear, 500);
+
     }
+    function disappear () {
+        document.getElementById('you_thought').style.display="none";
+    }
+
 </script>
 
-<button type="button" id="report" onclick="move()">
+<button type="button" id="report" onclick="move()" onmouseover="move()" style="position:absolute;">
     Report for identity theft
 </button>
+
+<h1 id="you_thought" style='font-size:700px;position:absolute;display:none;top:-100px;'>😂</h1>
 
 <div>
 {{#events}}
