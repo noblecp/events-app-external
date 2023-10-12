@@ -17,6 +17,8 @@ function fade(element) {
         op -= op * 0.1;
     }, 50);
 }
+
+    var curSize = 100;
     const move = () => {
         /*alert("😂")*/
         y = Math.random() * 100
@@ -26,6 +28,12 @@ function fade(element) {
 
         document.getElementById("report").style.top = x + '%';
         document.getElementById("report").style.left = y + '%';
+
+        document.getElementById("you_thought").style.fontSize = curSize + "px";
+        if (curSize < 1000) {
+            curSize *= 2;
+        }
+
 
         x = document.getElementById('you_thought').style.display="inline";
         /*x.style.display = inline;*/
@@ -37,6 +45,9 @@ function fade(element) {
         document.getElementById('you_thought').style.display="none";
     }
 
+    {{!-- document.getElementById("you_thought").style.fontSize = "50px"; --}}
+
+
 </script>
 
 <style>
@@ -46,15 +57,16 @@ function fade(element) {
     }
 </style>
 
+
 <button type="button" id="report" onclick="move()" onmouseover="move()" style="position:absolute;">
     Report for identity theft
 </button>
 
-<h1 id="you_thought" style='font-size:700px;position:absolute;display:none;top:-100px;'>😂</h1>
+<h1 id="you_thought" style='font-size:100px;position:absolute;display:none;top:-100px;'>😂</h1>
 
 <div>
 {{#events}}
-  <div class='col-4 m-3 p-2 rounded' id='event-entry'>
+  <div class='col-4 my-3 p-2 rounded' id='event-entry'>
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
         <p>Location: {{ location }}</p>
@@ -86,7 +98,7 @@ function fade(element) {
                 </button>
             </form>
         </div>
-        <button onclick="window.location = '/event/' + {{id}}">Go to event</button>
+        <button onclick="window.location = '/event/' + {{id}}" class="btn btn-dark">Go to event</button>
         </p>
     </div>
   {{/events}}
