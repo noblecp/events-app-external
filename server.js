@@ -106,13 +106,16 @@ app.post('/login',
                     logged_in = true
                     console.log("Login successful")
                 }
-                else {
-                    console.log("Error: incorrect login information")
-                }
                 res.redirect("/"); // redirect to the home page on successful response
             });
 
     });
+
+app.get('/logout', (req, res) => {
+    logged_in = false
+    res.redirect("/")
+})
+
 
 // defines a route that receives the request to /
 app.get('/', (req, res) => {
