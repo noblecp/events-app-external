@@ -1,11 +1,11 @@
 <div>
     <form action="/logout" method="get">
-    <input type="submit" name="submit" value="submit" />
+    <input class="btn btn-danger" type="submit" name="submit" value="Log out" />
     </form>
 </div>
 
 {{#events}}
-  <div class='col-4' id='event-entry'>
+  <div class='col-4 m-3 p-2 rounded' id='event-entry'>
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
         <p>Location: {{ location }}</p>
