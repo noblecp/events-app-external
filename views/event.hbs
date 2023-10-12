@@ -1,3 +1,4 @@
+
 {{#events}}
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
@@ -14,8 +15,12 @@
         <img src="https://tse3.mm.bing.net/th/id/OIP.HAu8l9ToJmaNvUVYqmDe2AHaE8?pid=ImgDet&rs=1" alt="image can't be found" width="100" onerror="this.onerror=null; this.src='https://tse1.mm.bing.net/th/id/OIP.GhK0xqhcPT0DVriwmC4wOAHaHa?pid=ImgDet&rs=1'">
         </p>
 {{/events}}
-
-<button onclick="window.location = '/';">Go Home</button>
+<h3>Post Comment</h3>
+<form method="POST" action="/comment">
+    Author: <input type="text"  name="author"><br>
+    Comment: <input type="text" name="desc"><br>
+    <input type="submit" value="Add Comment">
+</form>
 
 <h1>COMMENTS</h1>
 <table class="table-bordered">
