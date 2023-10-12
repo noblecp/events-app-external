@@ -1,21 +1,27 @@
+<button onclick="window.location = '/';">Go Home</button>
 {{#events}}
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
         <p>Location: {{ location }}</p>
         <p>Likes: {{ likes }}
-        <form method="POST" action="/event/like2">
-        <input type="hidden" value="{{id}}" name="id">
-        <input type="submit" value="Like">
+        <form class="col-md-6" method="POST" action="/event/like2">
+            <input type="hidden" value="{{id}}" name="id">
+            <input type="submit" value="Like">
         </form>
         <form method="POST" action="/event/unlike2">
-        <input type="hidden" value="{{id}}" name="id">
-        <input type="submit" value="UN-Like">
+            <input type="hidden" value="{{id}}" name="id">
+            <input type="submit" value="UN-Like">
         </form>
         <img src="https://tse3.mm.bing.net/th/id/OIP.HAu8l9ToJmaNvUVYqmDe2AHaE8?pid=ImgDet&rs=1" alt="image can't be found" width="100" onerror="this.onerror=null; this.src='https://tse1.mm.bing.net/th/id/OIP.GhK0xqhcPT0DVriwmC4wOAHaHa?pid=ImgDet&rs=1'">
         </p>
 {{/events}}
-
-<button onclick="window.location = '/';">Go Home</button>
+<style>
+    .column {
+      display: inline-block;
+      width: 50%; /* Each column takes up 50% of the container's width */
+      box-sizing: border-box; /* Include padding and border in the width */
+    }
+</style>
 
 <h1>COMMENTS</h1>
 <table class="table-bordered">

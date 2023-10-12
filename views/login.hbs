@@ -9,17 +9,37 @@
     </div>
     <h2>Log in</h2>
     <form action="/login" method="post">
-        Username: <input class="my-2" name="username" type="text" /> <br />
-        Email: <input class="my-2" name="email" type="text" /> <br />
-        SSN: <input class="my-2" name="ssn" type="text" /> <br />
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Username</span>
+                <input id="#username_input" type="text" name="username" class="form-control">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                <input id="#email_input" type="text" name="email" class="form-control">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">SSN</span>
+                <input id="#ssn_input" type="text" name="ssn" class="form-control">
+            </div>
+        </div>
+
+        {{!-- Username: <input id="#username_input" class="my-2" name="username" type="text" /> <br /> --}}
+        {{!-- Email: <input id="#email_input" class="my-2" name="email" type="text" /> <br />
+        SSN: <input id="#ssn_input" class="my-2" name="ssn" type="text" /> <br /> --}}
         {{!-- <p>This is an official Government sponsored website.</p> --}}
         <br />
         <input class="btn btn-success" type="submit" name="submit" value="Submit" />
     </form>
     <i class="m-5">
-        <h1 style='color:red;'>9 out of 10 doctors recommend this app 👨‍⚕️👩‍⚕️</h1>
+        <h1 style='position:fixed; bottom:0; color:red;'>9 out of 10 doctors recommend this app 👨‍⚕️👩‍⚕️</h1>
     </i>
-    <hr/>
   {{/login}}
 </div>
 
@@ -58,6 +78,7 @@ var x = setInterval(function() {
     clearInterval(x);
     document.getElementById("countdown").innerHTML = '<div><p>Enter Walmart gift card code for another access attempt</p><input class="my-2" name="walmart_code" type="text" /><button>Send</button></div>';
     var divElement = document.getElementById("timer");
+    
   }
 }, 1000);
 
