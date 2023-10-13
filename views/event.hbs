@@ -53,8 +53,7 @@
             box-sizing: border-box; /* Include padding and border in the width */
             }
         </style>
-    </div>
-    <div class="right">
+        <div class="mt-5">
         <h3>Comments</h3>
         {{!-- <table class="table-bordered">
             <tr><td>Author</td><td>Comment</td></tr>
@@ -70,20 +69,22 @@
             <p>{{desc}}</p>
 
             <div class="d-flex justify-content-between">
-              <div class="d-flex flex-row align-items-center">
+              <div class="d-flex flex-column align-items-left">
                 <img class="rounded" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="300"
                   height="50" />
-                <p class="small mb-0 ms-2">{{author}}</p>
+                <p class="small mb-0 my-2">{{author}}</p>
               </div>
             </div>
           </div>
         </div>
         {{/comments}}
     </div>
+    </div>
+    <div className="right">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113565.67385638064!2d-78.89391846946619!3d33.76042550826318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89006fb8dd6bf227%3A0x959010883fdb1bbe!2sAlpha%20Male%20Clinic!5e0!3m2!1sen!2sus!4v1697142679725!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d164074.63851009874!2d85.86960807480564!3d20.49796854761604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1ssigma%20male!5e0!3m2!1sen!2sus!4v1697142035507!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
 </div>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113565.67385638064!2d-78.89391846946619!3d33.76042550826318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89006fb8dd6bf227%3A0x959010883fdb1bbe!2sAlpha%20Male%20Clinic!5e0!3m2!1sen!2sus!4v1697142679725!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-<iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d164074.63851009874!2d85.86960807480564!3d20.49796854761604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1ssigma%20male!5e0!3m2!1sen!2sus!4v1697142035507!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
 
 <style>
     #like_unlike {
@@ -95,6 +96,7 @@
         flex-direction: row;
     }
     .left {
+        width: 70rem;
         margin-right: 5rem
     }
 </style>
