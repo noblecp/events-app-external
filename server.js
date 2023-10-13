@@ -78,8 +78,11 @@ const uri = "mongodb+srv://user:user@cluster0.aws5yps.mongodb.net/?retryWrites=t
 
 
 
+
+
 var cloudComments = []
 const client = new MongoClient(uri);
+
 async  function getComments() {
     cloudComments = []
     console.log("GETTING COMMENTS")
@@ -97,31 +100,33 @@ async  function getComments() {
             cloudComments.push(doc)
         }
         
-       return cloudComments
+       
 
     } catch (e) {
         console.error(e);
     } finally {
         await client.close();
+        return cloudComments;
     }
-    return cloudComments
+    
 }
 getComments().catch(console.error);
 
 async function addComment(author, postId, desc) {
     try {
         // Connect to the MongoDB cluster
+        
         await client.connect();
 
         // Make the appropriate DB calls
 
         const myDB = client.db("test-app");
         const myColl = myDB.collection("comments");
-        await myColl.insertMany([{
+        await myColl.insertOne({
             "author": author,
             "eventId": postId,
             "desc": desc}
-        ])
+        );
     } catch (e) {
         console.error(e);
     } finally {
@@ -130,9 +135,11 @@ async function addComment(author, postId, desc) {
 }
 
 app.post('/comment',urlencodedParser, function(req, res) {
-    console.log(eid)
-    addComment(req.body.author, eid, req.body.desc)
-    res.redirect("event/"+ eid)
+    console.log(req.body.desc)
+    addComment(req.body.author, eid, req.body.desc).then( () =>{
+        res.redirect("event/"+ eid)}
+        );
+    
 });
 module.exports = app;
 
@@ -356,7 +363,6 @@ app.get('/event/:id', (req, res) => {
                     });
             }
             else {
-                console.log(req.params.id);
                 eid = req.params.id;
                 console.log('error:', error); // Print the error if one occurred
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
@@ -372,7 +378,7 @@ app.get('/event/:id', (req, res) => {
                         // received from the server
                         events: body.events.filter((val) => val.id == req.params.id),
                         eventId: req.params.id,
-                        comments: comments.filter((val) => val.eventId == req.params.id)
+                        comments: comments.filter((val) =>val.eventId == eid) 
                     }); // pass the data from the server to the template))
                 
                  })
@@ -425,4 +431,5 @@ app.post('/event/unlike2',
             });
 
     });
+  
 
