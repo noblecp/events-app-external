@@ -10,15 +10,18 @@
   <link rel="stylesheet" href="./../css/default.css">
   <style>
     #top-bar {
-        border: 1px solid black;
-        color: black;
-        background-color: lightblue;
-    }
-    #event-entry {
-        border: 1px solid black;
-        background: green        
+        {{!-- border: 1px solid black;
+        color: black; --}}
+        background-color: rgb(202, 232, 242);
+        text-align: center;
     }
 
+    #event-entry {
+        border: 1px solid black;
+        background: rgb(186, 237, 186)
+    }
+    
+    
     #add-event {
         border: 1px solid black;
         background-color: brown;
@@ -27,9 +30,10 @@
   </style>
 </head>
 <body>
-  <div>
-      <h1>Welcome to TAC and the Elastic Beanstalk's application</h1>
+  <div class="p-3">
+    <h1 id="top-bar" class="py-5">Welcome to TAC and the Elastic Beanstalk's application</h1>
     {{{body}}}
-</div>
+    </div>
+
 </body>
 </html>

